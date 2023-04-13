@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<base target="_blank">
+<link rel="stylesheet" type="text/css" href="./Qgis2threejs.css">
+<script src="./threejs/three.min.js"></script>
+<script src="./threejs/OrbitControls.js"></script>
+<script src="./threejs/ViewHelper.js"></script>
+<script src="./tweenjs/tween.js"></script>
+<script src="./Qgis2threejs.js"></script>
+<script src="./dat-gui/dat.gui.min.js"></script>
+<script src="./dat-gui_panel.js"></script>
+</head>
+<body>
+<div id="view">
+  <div id="northarrow"></div>
+  <div id="navigation"></div>
+</div>
+
+<!-- popup -->
+<div id="popup">
+  <div id="closebtn">&times;</div>
+  <div id="popupbar"></div>
+  <div id="popupbody">
+    <div id="popupcontent"></div>
+
+    <!-- query result -->
+    <div id="queryresult">
+      <table id="qr_coords_table">
+        <caption>Clicked coordinates <div id="zoomtopoint" class="action-zoom zoombtn"></div></caption>
+        <tr><td id="qr_coords"></td></tr>
+      </table>
+
+      <table id="qr_layername_table">
+        <caption>Layer <div id="zoomtolayer" class="action-zoom zoombtn"></div></caption>
+        <tr><td id="qr_layername"></td></tr>
+      </table>
+
+      <table id="qr_attrs_table">
+        <caption>Attributes</caption>
+      </table>
+
+      <!-- camera actions and measure tool -->
+      <div id="orbitbtn" class="action-btn action-orbit">Orbit</div>
+      <div id="measurebtn" class="action-btn">Measure distance</div>
+    </div>
+
+    <!-- page info -->
+    <div id="pageinfo">
+      <h1>Current View URL</h1>
+      <div><input id="urlbox" type="text"></div>
+
+      <h1>Usage</h1>
+      <table id="usage">
+        <tr><td colspan="2" class="star">Mouse</td></tr>
+        <tr><td>Left button + Move</td><td>Orbit</td></tr>
+        <tr><td>Mouse Wheel</td><td>Zoom</td></tr>
+        <tr><td>Right button + Move</td><td>Pan</td></tr>
+
+        <tr><td colspan="2" class="star">Keys</td></tr>
+        <tr><td>Arrow keys</td><td>Move Horizontally</td></tr>
+        <tr><td>Shift + Arrow keys</td><td>Orbit</td></tr>
+        <tr><td>Ctrl + Arrow keys</td><td>Rotate</td></tr>
+        <tr><td>Shift + Ctrl + Up / Down</td><td>Zoom In / Out</td></tr>
+        <tr><td>L</td><td>Toggle Label Visibility</td></tr>
+        <tr><td>R</td><td>Start / Stop Orbit Animation</td></tr>
+        <tr><td>W</td><td>Wireframe Mode</td></tr>
+        <tr><td>Shift + R</td><td>Reset Camera Position</td></tr>
+        <tr><td>Shift + S</td><td>Save Image</td></tr>
+      </table>
+
+      <h1>About</h1>
+      <div id="about">
+        This page was made with <a href="https://www.qgis.org/">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs">Qgis2threejs</a> plugin (version 2.7.1).
+        <div>Powered by <a href="https://threejs.org/">three.js</a>,
+        <a href="https://code.google.com/p/dat-gui/">dat-gui</a>
+        <span id="lib_proj4js"> and <a href="https://trac.osgeo.org/proj4js/">Proj4js</a></span>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- progress bar -->
+<div id="progress"><div id="progressbar"></div></div>
+
+<!-- header and footer -->
+<div id="header"></div>
+<div id="footer">The DEMs were retrieved from the work of Pedersen et al., 2022 available in https://zenodo.org/record/6598466 </div>
+
+<!-- animation -->
+<div id="narrativebox" class="ef1">
+  <div id="narbody">
+    <div id="nar_ebacb526" class="narcontent">
+      The Fagradalsfjall volcano is located on the Reykjanes Peninsula (RP) in Iceland. The highest point in the volcanic system reaches ~390 m.a.s.l. 
+      
+      
+    </div>
+    <div id="nar_db9c3094" class="narcontent">
+      This eruption started on 19 March 2021 when an eruptive fissure appeared in the Geldingadalir valley, and lasted for a period of 6 months, ending on 19 September 2021. 
+      
+      <img src="./data/index/img/LightsUpVolcanicEruption.jpg" width="100%">
+      
+      "Volcanic Eruption Lights Up Iceland"
+      
+      From https://earthobservatory.nasa.gov/images/148079/volcanic-eruption-lights-up-iceland
+    </div>
+    <div id="nar_856b730d" class="narcontent">
+      The lava flow paths were extracted from Sentinel-1 data using Object-based Image Analysis. Different dates throughout the eruption were selected for the extraction process.
+      
+      The first phase of the eruption initiated with the opening of a 180 meters length fissure that rapidly became two different vents with fountaining activity filling the Geldingadallir valley.
+      
+      Check the area covered by this phase in the layers panel using "Lava outline 31/03/2021"
+      
+      <img src="./data/index/img/Lava1.png" width="100%">
+      
+      Sentinel-2 image of the area as for 30/03/2021
+      
+      
+    </div>
+    <div id="nar_982795f0" class="narcontent">
+      The second phase started on 05 April 2021 with the aperture of five additional vents and the active vent migration, extending the eruption to the northeast. The activity included bubble-bursting and outpouring of lava in variable amounts alternated between vents.
+      
+      Check the area covered by this phase in the layers panel using "Lava outline 12/04/2021"
+      
+      <img src="./data/index/img/Lava2.gif" width="100%"> 
+      
+      Source images from www.ruv.is
+      
+    </div>
+    <div id="nar_2f52fe3f" class="narcontent">
+      The third phase began from 27 April 2021 and was characterized by an increase in the lava time-average discharge rate with lava fountains along with different intensity and periodicity from a single vent, which remained active for the rest of the eruption. 
+      
+      Check the area covered by this phase in the layers panel using "Lava outline 18/05/2021"
+      
+      
+      
+      
+    </div>
+    <div id="nar_c9051afb" class="narcontent">
+      Intermittent volcanic activity from 28 June 2021 marked the beginning of the fourth phase exposing non-continuous fountaining and episodes of strong lava emplacement alternated with repose intervals. 
+      
+      Check the area covered by this phase in the layers panel using "Lava outline 29/07/2021"
+      
+      <img src="./data/index/img/Lava4.png" width="100%">
+      
+      Planet imagery as for 29/07/2021
+    </div>
+    <div id="nar_e5ad23d2" class="narcontent">
+      The phase 5 was established on 02 September 2021, starting with week-long pause in the volcanic activity followed by  week-long lava outpouring episode.  By the end of the eruption on 18 September 2021, the estimated area covered by the lava flow was 4.8 km² (Pedersen et al., 2022)
+      
+      Check the area covered by this phase in the layers panel using "Lava outline 04/10/2021"
+    </div>
+  </div>
+  <div id="nextbtn"></div>
+</div>
+
+<script>
+Q3D.Config.localMode = true;
+Q3D.Config.animation.enabled = true;
+Q3D.Config.animation.startOnLoad = true;
+Q3D.Config.northArrow.enabled = true;
+Q3D.Config.northArrow.color = 0x666666;
+
+var container = document.getElementById("view"),
+    app = Q3D.application,
+    gui = Q3D.gui;
+
+app.init(container);    // initialize viewer
+
+// load the scene
+app.loadSceneFile("./data/index/scene.js", function (scene) {
+  // scene file has been loaded
+  app.start();
+
+  gui.dat.initLayersFolder(scene);
+
+}, function (scene) {
+  // all relevant files have been loaded
+
+  if (Q3D.Config.gui.customPlane) {
+    var zMin = undefined,
+        zMax = undefined;
+    gui.dat.initCustomPlaneFolder(zMin, zMax);
+  }
+});
+</script>
+</body>
+</html>
