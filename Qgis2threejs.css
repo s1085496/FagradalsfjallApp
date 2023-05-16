@@ -4,6 +4,15 @@ SPDX-License-Identifier: MIT
 https://github.com/minorua/Qgis2threejs
 */
 
+h1 {
+  color: #ffffff;
+  font-family: arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 1px;
+  }
+
 body {
   font-family: arial, sans-serif;
   margin: 0;
