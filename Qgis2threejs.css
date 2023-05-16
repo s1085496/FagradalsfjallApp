@@ -4,17 +4,8 @@ SPDX-License-Identifier: MIT
 https://github.com/minorua/Qgis2threejs
 */
 
-h1 {
-  color: #ffffff;
-  font-family: arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 0px;
-  margin-bottom: 1px;
-  }
-
 body {
-  font-family: arial, sans-serif;
+  font-family: calibri, sans-serif;
   margin: 0;
   overflow: hidden;
 }
@@ -26,8 +17,8 @@ body {
 }
 
 #view.sky {
-  background: -webkit-gradient(linear, left top, left bottom, from(#98c8f6), color-stop(0.4, #cbebff), to(#f0f9ff));
-  background: linear-gradient(to bottom, #98c8f6 0%,#cbebff 40%,#f0f9ff 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#000000), color-stop(0.4, #000000), to(#000000));
+  background: linear-gradient(to bottom, #000000 0%,#000000 40%,#000000 100%);
 }
 
 .hidden {
@@ -90,7 +81,7 @@ body {
 #progressbar {
   width: 0;
   height: 5px;
-  background-color: #2196F3;
+  background-color: #e58f1f;
   opacity: 1;
 }
 
@@ -103,7 +94,7 @@ body {
 #toolbtns {
   position: absolute;
   margin: 1px;
-  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 1px 2px 6px rgba(41, 41, 41, 0.2);
   float: left;
 }
 
@@ -127,7 +118,7 @@ body {
   position: absolute;
   margin: 1px 2px;
   background-color: white;
-  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 1px 2px 6px rgba(105, 104, 104, 0.2);
   z-index: 1000;
   display: none;
 }
@@ -159,13 +150,19 @@ body {
 
 #header {
   position: absolute;
+  background-color:rgb(32, 32, 31);
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
   margin: 5px 10px;
 }
 
 #footer {
   position: absolute;
+  color: rgb(173, 173, 173);
+  font-size: x-small;
   left: 5px;
-  bottom: 5px;
+  bottom: 2px;
 }
 
 /* popup */
@@ -183,7 +180,7 @@ body {
 #popupbar {
   padding-left: 4px;
   height: 19px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid rgb(244, 199, 154);
   border-radius: 3px 3px 0 0;
 }
 
@@ -384,10 +381,11 @@ table.measure tr > td:nth-child(2) {
 /* widgets */
 #northarrow {
   position: absolute;
+  color: white;
   left: 12px;
   bottom: 16px;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   z-index: 1000;
   pointer-events: none;
   display: none;
@@ -396,7 +394,7 @@ table.measure tr > td:nth-child(2) {
 #navigation {
   position: absolute;
   right: 0px;
-  bottom: 0px;
+  bottom: 10px;
   width: 128px;
   height: 128px;
   z-index: 1000;
@@ -407,15 +405,15 @@ table.measure tr > td:nth-child(2) {
 #narrativebox {
   position: absolute;
   z-index: 1001;
-  left: 2px;
-  top: 2px;
-  max-width: 40%;
-  max-height: 80%;
+  left: 10px;
+  bottom: 10px;
+  max-width: 30%;
+  max-height: 60%;
   min-width: 200px;
 
-  border: 1px solid gray;
+  border: 1px solid rgb(4, 15, 49);
   border-radius: 2px;
-  background-color: rgba(255, 255, 255, .95);
+  background-color: rgba(59, 59, 59, 0.95);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
   padding: 8px;
 
@@ -423,7 +421,8 @@ table.measure tr > td:nth-child(2) {
 }
 
 #narrativebox.ef1 {
-  top: 90%;
+  top: 80%;
+  color: rgb(199, 199, 199);
   height: 0;
   opacity: 0;
 }
@@ -431,7 +430,7 @@ table.measure tr > td:nth-child(2) {
 #narrativebox.ef1.visible {
   transition: all ease-out .2s;
 
-  top: 2px;
+  top: 10%;
   height: auto;
   opacity: 1;
 }
